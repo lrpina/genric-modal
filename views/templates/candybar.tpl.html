@@ -1,25 +1,38 @@
 <section class="row the-modal" style="overflow-y: scroll;">
     <div class="modal-body" style="overflow: hidden;">
 
-        <div class="row">
+        <!--<div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-offset-11 col-md-offset-11 col-sm-offset-11 col-xs-offset-9">
                 <a class="myCloseBtn img-responsive" ng-click="cancel()"></a>
             </div>
-        </div>
+        </div>-->
 
         <header class="row">
             <h2 class="col-lg-12">Candy Bar</h2>
         </header>
 
-        <article class="row">
+        <div class="row">
             <div class="col-lg-12">
                 <p>
                     It gave a trip to the dentist.<br/>
                     <!--see our attribute from housing HTML made it to the modal instance's template.-->
                     Contact Email: {{custEmail.email}}
                 </p>
+
             </div>
 
-        </article>
+        </div>
+        <div class="row">
+        <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
     </div>
 </section>

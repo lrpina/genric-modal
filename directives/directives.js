@@ -23,6 +23,35 @@ var templateDir = 'templates/';
  The above example decalares a modal window where the template is found at js/templates/modal_instance.html and uses the
  controller MyModalInstanceCtrl
  */
+ module.controller('RedBullCtrl', function($scope, $modalInstance, custEmail){
+    //add the scope
+    $scope.custEmail = custEmail;
+   
+    $scope.ok = function(){
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
+
+module.controller('CandyBarCtrl', function($scope, $modalInstance, custEmail){
+    //add the scope
+    $scope.custEmail = custEmail;
+    $scope.items = ['item1', 'item2', 'item3'];
+    $scope.selected ={
+        item: $scope.items[0]
+    };
+    $scope.ok = function(){
+        $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
+
 
 module.directive('myModal', function($modal){
 
@@ -36,8 +65,8 @@ module.directive('myModal', function($modal){
         },
         link: function(scope, element, attrs) {
 
-            console.log('Attrs: ', attrs);
-//            console.log('SCOPE: ', scope);Z
+  //          console.log('Attrs: ', attrs);
+ //           console.log('SCOPE: ', scope);
 
             scope.open = function(){
 
@@ -53,28 +82,15 @@ module.directive('myModal', function($modal){
                             return {email: scope.email};
                         }
                     }
-
                 });
 
-                modalInstance.result.then(function(){
+                modalInstance.result.then(function(selectedItem){ //selectedItem //maybe this is what goes if I want to show it in the outer html
+                    scope.selected = selectedItem;
                     console.log('Finished');
                 }, function(){
                     console.log('Modal dismissed at : ' + new Date());
                 });
             };
         }
-    };
-});
-
-module.controller('RedBullCtrl', function($scope, $modalInstance, custEmail){
-    //add the scop
-    $scope.custEmail = custEmail;
-
-    $scope.ok = function(){
-        $modalInstance.close();
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
     };
 });
